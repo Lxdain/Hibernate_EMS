@@ -30,62 +30,74 @@ public class GUI extends JFrame {
     private Employee selectedEmployee; // Store selected employee
 
     public GUI() {
+        initialize();
+        functionality = new Functionality();
+        populateOutputComboBox();
+        addOutputComboBoxListener();
+        addButtonListener();
+        searchButtonListener();
+        showAllButtonListener();
+        addSaveButtonListener();
+        addDeleteButtonListener();
+    }
+
+    private void initialize() {
         setTitle("Employee Management System");
         setContentPane(accountPanel);
         setMinimumSize(new Dimension(800, 600));
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
         setResizable(true);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
 
-        functionality = new Functionality();
+    private void populateOutputComboBox() {
+        outputComboBox.removeAllItems();
+        List<Employee> employees = functionality.retrieveEmployees();
+        for (Employee employee : employees) {
+            outputComboBox.addItem(employee.getName());
+        }
+    }
 
+    private void addOutputComboBoxListener() {
+        outputComboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedName = (String) outputComboBox.getSelectedItem();
+                if (selectedName != null) {
+                    Employee selectedEmployee = functionality.getEmployeeByName(selectedName);
+                    if (selectedEmployee != null) {
+                        nameField.setText(selectedEmployee.getName());
+                        ageField.setText(String.valueOf(selectedEmployee.getAge()));
+                        addressField.setText(selectedEmployee.getAddress());
+                        salaryField.setText(String.valueOf(selectedEmployee.getSalary()));
+                    }
+                }
+            }
+        });
+    }
+
+    private void addButtonListener() {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String name = nameField.getText();
-                String ageText = ageField.getText();
+                int age = Integer.parseInt(ageField.getText());
                 String address = addressField.getText();
-                String salaryText = salaryField.getText();
-
-                if (!isValidNumber(ageText) || !isValidNumber(salaryText)) {
-                    outputLabel.setText("Invalid input type. These fields only accept numeric parameters.");
-                    clearOutputLabelAfterDelay(3000);
-                    return;
-                }
-
-                int age = Integer.parseInt(ageText);
-                double salary = Double.parseDouble(salaryText);
+                double salary = Double.parseDouble(salaryField.getText());
 
                 Employee employee = new Employee(name, age, address, salary);
                 functionality.addEmployee(employee);
-                displayEmployees();
+                populateOutputComboBox();
+                outputLabel.setText("Employee added successfully!");
+                displayEmployeeInfo(employee);
                 clearFields();
+                clearOutputLabelAfterDelay(3000);
             }
         });
+    }
 
-        deleteButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (selectedEmployee != null) {
-                    functionality.deleteEmployee(selectedEmployee.getId());
-                    displayEmployees();
-                    clearFields();
-                    outputLabel.setText("Employee Successfully Deleted!");
-
-                    // Delayed clearing of outputLabel after 3 seconds
-                    Timer timer = new Timer(3000, new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            outputLabel.setText("");
-                        }
-                    });
-                    timer.setRepeats(false);
-                    timer.start();
-                }
-            }
-        });
-
+    private void searchButtonListener() {
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -95,7 +107,9 @@ public class GUI extends JFrame {
                 clearFields();
             }
         });
+    }
 
+    private void showAllButtonListener() {
         showAllButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -104,73 +118,54 @@ public class GUI extends JFrame {
                 clearFields();
             }
         });
+    }
 
+    private void addSaveButtonListener() {
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (selectedEmployee != null) {
-                    String name = nameField.getText();
-                    String ageText = ageField.getText();
-                    String address = addressField.getText();
-                    String salaryText = salaryField.getText();
+                if (outputComboBox.getSelectedItem() != null) {
+                    String selectedName = (String) outputComboBox.getSelectedItem();
+                    Employee selectedEmployee = functionality.getEmployeeByName(selectedName);
+                    if (selectedEmployee != null) {
+                        String name = nameField.getText();
+                        int age = Integer.parseInt(ageField.getText());
+                        String address = addressField.getText();
+                        double salary = Double.parseDouble(salaryField.getText());
 
-                    if (!isValidNumber(ageText) || !isValidNumber(salaryText)) {
-                        outputLabel.setText("Invalid input type. These fields only accept numeric parameters.");
+                        selectedEmployee.setName(name);
+                        selectedEmployee.setAge(age);
+                        selectedEmployee.setAddress(address);
+                        selectedEmployee.setSalary(salary);
+
+                        functionality.editEmployee(selectedEmployee);
+                        outputLabel.setText("Employee edited successfully!");
+                        displayEmployeeInfo(selectedEmployee);
+                        clearFields();
                         clearOutputLabelAfterDelay(3000);
-                        return;
-                    }
-
-                    int age = Integer.parseInt(ageText);
-                    double salary = Double.parseDouble(salaryText);
-
-                    selectedEmployee.setName(name);
-                    selectedEmployee.setAge(age);
-                    selectedEmployee.setAddress(address);
-                    selectedEmployee.setSalary(salary);
-                    functionality.editEmployee(selectedEmployee);
-                    outputLabel.setText("Employee edited successfully!");
-                    clearFields();
-                }
-            }
-        });
-
-        outputComboBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String selectedEmployeeName = (String) outputComboBox.getSelectedItem();
-                if (selectedEmployeeName != null) {
-                    Employee employee = functionality.getEmployeeByName(selectedEmployeeName);
-                    if (employee != null) {
-                        selectedEmployee = employee;
-                        setEmployeeFields(employee); // Populate the fields with the selected employee info
-                        displayEmployeeInfo(employee);
                     }
                 }
             }
         });
     }
 
-    private boolean isValidNumber(String text) {
-        return text.matches("\\d+");
-    }
-
-    private void clearOutputLabelAfterDelay(int delay) {
-        Timer timer = new Timer(delay, new ActionListener() {
+    private void addDeleteButtonListener() {
+        deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                outputLabel.setText("");
+                if (outputComboBox.getSelectedItem() != null) {
+                    String selectedName = (String) outputComboBox.getSelectedItem();
+                    Employee selectedEmployee = functionality.getEmployeeByName(selectedName);
+                    if (selectedEmployee != null) {
+                        functionality.deleteEmployee(selectedEmployee.getId());
+                        outputLabel.setText("Employee deleted successfully!");
+                        populateOutputComboBox();
+                        clearFields();
+                        clearOutputLabelAfterDelay(3000);
+                    }
+                }
             }
         });
-        timer.setRepeats(false);
-        timer.start();
-    }
-
-    private void displayEmployees() {
-        List<Employee> employees = functionality.retrieveEmployees();
-        outputComboBox.removeAllItems(); // Clear previous items
-        for (Employee employee : employees) {
-            outputComboBox.addItem(employee.getName()); // Add employee name to JComboBox
-        }
     }
 
     private void displayEmployees(List<Employee> employees) {
@@ -185,15 +180,17 @@ public class GUI extends JFrame {
         ageField.setText("");
         addressField.setText("");
         salaryField.setText("");
-        textField1.setText("");
-        selectedEmployee = null;
     }
 
-    private void setEmployeeFields(Employee employee) {
-        nameField.setText(employee.getName());
-        ageField.setText(String.valueOf(employee.getAge()));
-        addressField.setText(employee.getAddress());
-        salaryField.setText(String.valueOf(employee.getSalary()));
+    private void clearOutputLabelAfterDelay(int delay) {
+        Timer timer = new Timer(delay, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                outputLabel.setText("");
+            }
+        });
+        timer.setRepeats(false);
+        timer.start();
     }
 
     private void displayEmployeeInfo(Employee employee) {
@@ -213,4 +210,8 @@ public class GUI extends JFrame {
         });
     }
 }
+
+
+
+
 

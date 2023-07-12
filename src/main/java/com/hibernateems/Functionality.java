@@ -5,6 +5,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,16 +54,15 @@ public class Functionality {
     }
 
     public void editEmployee(Employee employee) {
-        Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {
-            transaction = session.beginTransaction();
-            session.update(employee);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
+            Transaction transaction = session.beginTransaction();
+            try {
+                session.update(employee);
+                transaction.commit();
+            } catch (Exception ex) {
                 transaction.rollback();
+                throw ex;
             }
-            System.out.println("Failed to update employee. Error: " + e.getMessage());
         }
     }
 
@@ -96,13 +98,19 @@ public class Functionality {
     public List<Employee> searchEmployees(String searchCriteria) {
         List<Employee> employees = new ArrayList<>();
         try (Session session = sessionFactory.openSession()) {
-            employees = session.createQuery("FROM Employee " +
-                            "WHERE id <> :id AND (name LIKE :search OR age = :age OR address LIKE :search OR salary = :salary)", Employee.class)
-                    .setParameter("id", 0)
-                    .setParameter("search", "%" + searchCriteria + "%")
-                    .setParameter("age", parseInteger(searchCriteria))
-                    .setParameter("salary", parseDouble(searchCriteria))
-                    .list();
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery<Employee> criteriaQuery = criteriaBuilder.createQuery(Employee.class);
+            Root<Employee> root = criteriaQuery.from(Employee.class);
+            criteriaQuery.select(root).where(
+                    criteriaBuilder.notEqual(root.get("id"), 0),
+                    criteriaBuilder.or(
+                            criteriaBuilder.like(root.get("name"), "%" + searchCriteria + "%"),
+                            criteriaBuilder.equal(root.get("age"), parseInteger(searchCriteria)),
+                            criteriaBuilder.like(root.get("address"), "%" + searchCriteria + "%"),
+                            criteriaBuilder.equal(root.get("salary"), parseDouble(searchCriteria))
+                    )
+            );
+            employees = session.createQuery(criteriaQuery).list();
         } catch (Exception e) {
             System.out.println("Failed to search employees. Error: " + e.getMessage());
         }
@@ -122,9 +130,11 @@ public class Functionality {
     public Employee getEmployeeByName(String name) {
         Employee employee = null;
         try (Session session = sessionFactory.openSession()) {
-            employee = session.createQuery("FROM Employee WHERE name = :name", Employee.class)
-                    .setParameter("name", name)
-                    .uniqueResult();
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery<Employee> criteriaQuery = criteriaBuilder.createQuery(Employee.class);
+            Root<Employee> root = criteriaQuery.from(Employee.class);
+            criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("name"), name));
+            employee = session.createQuery(criteriaQuery).uniqueResult();
         } catch (Exception e) {
             System.out.println("Failed to retrieve employee. Error: " + e.getMessage());
         }
@@ -147,3 +157,7 @@ public class Functionality {
         }
     }
 }
+
+
+
+

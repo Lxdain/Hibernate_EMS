@@ -106,6 +106,7 @@
           <background color="-12628888"/>
           <icon value="img/personaddicon.png"/>
           <text value=""/>
+          <toolTipText value="Add Employee"/>
         </properties>
       </component>
       <grid id="9c849" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -145,6 +146,7 @@
           <background color="-12628888"/>
           <icon value="img/searchicon.png"/>
           <text value=""/>
+          <toolTipText value="Search Employees"/>
         </properties>
       </component>
       <component id="855cc" class="javax.swing.JButton" binding="showAllButton">
@@ -155,6 +157,7 @@
           <background color="-12628888"/>
           <icon value="img/group.png"/>
           <text value=""/>
+          <toolTipText value="Show All Empolyees"/>
         </properties>
       </component>
       <component id="9c5cc" class="javax.swing.JButton" binding="saveButton">
@@ -165,6 +168,7 @@
           <background color="-12628888"/>
           <icon value="img/donesaveicon.png"/>
           <text value=""/>
+          <toolTipText value="Save Edited Info"/>
         </properties>
       </component>
       <component id="c76ee" class="javax.swing.JButton" binding="deleteButton">
@@ -175,6 +179,7 @@
           <background color="-12628888"/>
           <icon value="img/personremoveicon.png"/>
           <text value=""/>
+          <toolTipText value="Delete Selected Employee"/>
         </properties>
       </component>
       <component id="44169" class="javax.swing.JLabel" binding="outputLabel">

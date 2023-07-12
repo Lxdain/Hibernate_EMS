@@ -18,7 +18,7 @@ public class GUI extends JFrame {
     private JLabel salaryLabel;
     private JTextField salaryField;
     private JButton addButton;
-    private JTextField textField1;
+    private JTextField searchField;
     private JComboBox<String> outputComboBox;
     private JLabel outputLabel;
     private JButton searchButton;
@@ -101,7 +101,7 @@ public class GUI extends JFrame {
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String searchCriteria = textField1.getText();
+                String searchCriteria = searchField.getText();
                 List<Employee> employees = functionality.searchEmployees(searchCriteria);
                 displayEmployees(employees);
                 clearFields();

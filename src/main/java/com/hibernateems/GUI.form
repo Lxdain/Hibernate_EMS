@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.hibernateems.GUI">
+  <grid id="27dc6" binding="accountPanel" layout-manager="GridLayoutManager" row-count="10" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="638" height="489"/>
+    </constraints>
+    <properties>
+      <background color="-5188609"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <component id="af17" class="javax.swing.JLabel" binding="titleText">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Calibri" size="32" style="1"/>
+          <text value="Employee Management System"/>
+        </properties>
+      </component>
+      <component id="6c7ee" class="javax.swing.JTextField" binding="nameField">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-10062693"/>
+          <font name="Calibri" size="16" style="0"/>
+        </properties>
+      </component>
+      <component id="adeea" class="javax.swing.JLabel" binding="nameLabel">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Calibri" size="20" style="1"/>
+          <text value="Name"/>
+        </properties>
+      </component>
+      <component id="e50e8" class="javax.swing.JLabel" binding="ageLabel">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Calibri" size="20" style="1"/>
+          <text value="Age"/>
+        </properties>
+      </component>
+      <component id="d8c2f" class="javax.swing.JTextField" binding="ageField">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-10062693"/>
+          <font name="Calibri" size="16" style="0"/>
+        </properties>
+      </component>
+      <component id="bdf4d" class="javax.swing.JLabel" binding="addressLabel">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Calibri" size="20" style="1"/>
+          <text value="Address"/>
+        </properties>
+      </component>
+      <component id="6edfd" class="javax.swing.JTextField" binding="addressField">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-10062693"/>
+        </properties>
+      </component>
+      <component id="3f5e" class="javax.swing.JLabel" binding="salaryLabel">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-10062693"/>
+          <font name="Calibri" size="20" style="1"/>
+          <text value="Salary"/>
+        </properties>
+      </component>
+      <component id="aa284" class="javax.swing.JTextField" binding="salaryField">
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-10062693"/>
+        </properties>
+      </component>
+      <component id="b45a3" class="javax.swing.JButton" binding="addButton">
+        <constraints>
+          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-12628888"/>
+          <icon value="img/personaddicon.png"/>
+          <text value=""/>
+        </properties>
+      </component>
+      <grid id="9c849" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="6" column="1" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-5188609"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="af87b" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-9536357"/>
+              <font name="Calibri" size="16" style="0"/>
+            </properties>
+          </component>
+          <component id="1a743" class="javax.swing.JComboBox" binding="outputComboBox">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+          </component>
+        </children>
+      </grid>
+      <component id="b7f9b" class="javax.swing.JButton" binding="searchButton">
+        <constraints>
+          <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-12628888"/>
+          <icon value="img/searchicon.png"/>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="855cc" class="javax.swing.JButton" binding="showAllButton">
+        <constraints>
+          <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-12628888"/>
+          <icon value="img/group.png"/>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="9c5cc" class="javax.swing.JButton" binding="saveButton">
+        <constraints>
+          <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-12628888"/>
+          <icon value="img/donesaveicon.png"/>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="c76ee" class="javax.swing.JButton" binding="deleteButton">
+        <constraints>
+          <grid row="9" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-12628888"/>
+          <icon value="img/personremoveicon.png"/>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="44169" class="javax.swing.JLabel" binding="outputLabel">
+        <constraints>
+          <grid row="8" column="1" row-span="2" col-span="1" vsize-policy="2" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="685c8" class="javax.swing.JLabel" binding="headerIcon">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <icon value="img/accountcircleicon.png"/>
+          <text value=""/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

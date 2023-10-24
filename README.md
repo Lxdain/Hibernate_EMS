@@ -1,7 +1,7 @@
 # Hibernate_EMS
 Remake of the JDBC Employee Management System utilizing Hibernate. Alongside Hibernate I am exploring Maven as a dependancy manager.
 
-# In Detail
+## In Detail
 Another project I made as part of the ITAcademy curriculum, quite similar to the [JDBC_EMS](https://github.com/lxdain/JDBC_EMS/) project I made with the diference being the use of HibernateORM.
 
 This time, you can clearly see the use of annotations (which I quite prefer over writing SQL queries), also Maven was used as a dependancy manager for the project so it was easier to get started with actual coding.
